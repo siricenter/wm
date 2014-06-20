@@ -63,7 +63,14 @@ def room_type_manage():
     return dict()
 #This is the tenant registration form
 def registration_form():
-    form=FORM('Your name:', INPUT(_name='name', requires=IS_NOT_EMPTY()), INPUT(_type='submit'))
+    form=FORM('First name:', INPUT(_name='fName', requires=IS_NOT_EMPTY()),
+              'Last name:', INPUT(_name='lName', requires=IS_NOT_EMPTY()),
+              'Gender:', INPUT(_name='gender', requires=IS_NOT_EMPTY()),
+              'Current address:', INPUT(_name='cAddress', requires=IS_NOT_EMPTY()),
+              'Current city:', INPUT(_name='cCity', requires=IS_NOT_EMPTY()),
+              'Current state:', INPUT(_name='pState', requires=IS_NOT_EMPTY()),
+              'Zip:', INPUT(_name='zip', requires=IS_NOT_EMPTY()),
+              INPUT(_type='submit'))
     if form.accepts(request,session):
         response.flash = 'form accepted'
         process_registration(form)
@@ -75,9 +82,14 @@ def registration_form():
 
 # This function processes the registration form and add the data to the database
 def process_registration(form):
-    user_info_table = t_user_info_manage()
-    user_info_table.vars.firstname = form.name
-    response.flash = user_info_table.vars.firstname
+    user_t = t_user_info_manage()
+    user_t.vars.firstname = form.vars.fname
+    response.flash = user_t.vars.firstname
+    return dict(table = user_t)
+
+#  NOT FINISHED
+# this function is to display a contract in a printable format
+def display_full_contract(id):
     return
 
 #@auth.requires_login()

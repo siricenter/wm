@@ -82,9 +82,14 @@ def registration_form():
 
 # This function processes the registration form and add the data to the database
 def process_registration(form):
-    user_info_table = t_user_info_manage()
-    user_info_table.vars.firstname = form.name
-    response.flash = user_info_table.vars.firstname
+    user_t = t_user_info_manage()
+    user_t.vars.firstname = form.vars.fname
+    response.flash = user_t.vars.firstname
+    return dict(table = user_t)
+
+#  NOT FINISHED
+# this function is to display a contract in a printable format
+def display_full_contract(id):
     return
 
 #@auth.requires_login()
