@@ -61,69 +61,179 @@ def room_manage():
 @auth.requires_login()
 def room_type_manage():
     return dict()
+#This is the tenant registration form
+def registration_form():
+    form=FORM('First name:', INPUT(_name='fName', requires=IS_NOT_EMPTY()),
+              'Last name:', INPUT(_name='lName', requires=IS_NOT_EMPTY()),
+              'Gender:', INPUT(_name='gender', requires=IS_NOT_EMPTY()),
+              'Current address:', INPUT(_name='cAddress', requires=IS_NOT_EMPTY()),
+              'Current city:', INPUT(_name='cCity', requires=IS_NOT_EMPTY()),
+              'Current state:', INPUT(_name='pState', requires=IS_NOT_EMPTY()),
+              'Zip:', INPUT(_name='zip', requires=IS_NOT_EMPTY()),
+              INPUT(_type='submit'))
+    if form.accepts(request,session):
+        response.flash = 'form accepted'
+        process_registration(form)
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill the form'
+    return dict(form=form)
 
-@auth.requires_login()
+# This function processes the registration form and add the data to the database
+def process_registration(form):
+    user_info_table = t_user_info_manage()
+    user_info_table.vars.firstname = form.name
+    response.flash = user_info_table.vars.firstname
+    return
+
+#@auth.requires_login()
 def t_building_manage():
-    form = SQLFORM.smartgrid(db.t_t_building,onupdate=auth.archive)
-    return locals()
+    form = SQLFORM(db.t_building)
+    if form.process().accepted:
+        response.flash = 'form accepted';
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form)
 
-@auth.requires_login()
+#@auth.requires_login()
 def t_floor_manage():
-    form = SQLFORM.smartgrid(db.t_t_floor,onupdate=auth.archive)
-    return locals()
+    form = SQLFORM(db.t_floor)
+    if form.process().accepted:
+        response.flash = 'form accepted';
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form)
 
-@auth.requires_login()
+#@auth.requires_login()
 def t_apartment_manage():
-    form = SQLFORM.smartgrid(db.t_t_apartment,onupdate=auth.archive)
-    return locals()
+    form = SQLFORM(db.t_apartment)
+    # .smartgrid(db.t_t_building,onupdate=auth.archive)
+    if form.process().accepted:
+        response.flash = 'form accepted';
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form)
 
-@auth.requires_login()
+#@auth.requires_login()
 def t_apartment_type_manage():
-    form = SQLFORM.smartgrid(db.t_t_apartment_type,onupdate=auth.archive)
-    return locals()
+    form = SQLFORM(db.t_apartment_type)
+    if form.process().accepted:
+        response.flash = 'form accepted';
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form)
 
-@auth.requires_login()
+
+#@auth.requires_login()
 def t_user_info_manage():
-    form = SQLFORM.smartgrid(db.t_t_user_info,onupdate=auth.archive)
-    return locals()
+    form = SQLFORM(db.t_user_info)
+    return form
 
-@auth.requires_login()
+#@auth.requires_login()
 def t_contract_manage():
-    form = SQLFORM.smartgrid(db.t_t_contract,onupdate=auth.archive)
-    return locals()
+    form = SQLFORM(db.t_contract)
+    # .smartgrid(db.t_t_building,onupdate=auth.archive)
+    if form.process().accepted:
+        response.flash = 'form accepted';
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form)
 
-@auth.requires_login()
+#@auth.requires_login()
 def t_semester_manage():
-    form = SQLFORM.smartgrid(db.t_t_semester,onupdate=auth.archive)
-    return locals()
+    form = SQLFORM(db.t_semester)
+    # .smartgrid(db.t_t_building,onupdate=auth.archive)
+    if form.process().accepted:
+        response.flash = 'form accepted';
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form)
 
-@auth.requires_login()
+
+#@auth.requires_login()
 def t_parking_manage():
-    form = SQLFORM.smartgrid(db.t_t_parking,onupdate=auth.archive)
-    return locals()
+    form = SQLFORM(db.t_parking)
+    # .smartgrid(db.t_t_building,onupdate=auth.archive)
+    if form.process().accepted:
+        response.flash = 'form accepted';
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form)
 
-@auth.requires_login()
+#@auth.requires_login()
 def t_request_manage():
-    form = SQLFORM.smartgrid(db.t_t_request,onupdate=auth.archive)
-    return locals()
+    form = SQLFORM(db.t_request)
+    # .smartgrid(db.t_t_building,onupdate=auth.archive)
+    if form.process().accepted:
+        response.flash = 'form accepted';
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form)
 
-@auth.requires_login()
+
+#@auth.requires_login()
 def t_request_comments_manage():
-    form = SQLFORM.smartgrid(db.t_t_request_comments,onupdate=auth.archive)
-    return locals()
+    form = SQLFORM(db.t_request_comments)
+    # .smartgrid(db.t_t_building,onupdate=auth.archive)
+    if form.process().accepted:
+        response.flash = 'form accepted';
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form)
 
-@auth.requires_login()
+
+#@auth.requires_login()
 def t_request_type_manage():
-    form = SQLFORM.smartgrid(db.t_t_request_type,onupdate=auth.archive)
-    return locals()
+    form = SQLFORM(db.t_request_type)
+    # .smartgrid(db.t_t_building,onupdate=auth.archive)
+    if form.process().accepted:
+        response.flash = 'form accepted';
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form)
 
-@auth.requires_login()
+#@auth.requires_login()
 def t_room_manage():
-    form = SQLFORM.smartgrid(db.t_t_room,onupdate=auth.archive)
-    return locals()
+    form = SQLFORM(db.t_room)
+    # .smartgrid(db.t_t_building,onupdate=auth.archive)
+    if form.process().accepted:
+        response.flash = 'form accepted';
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form)
 
-@auth.requires_login()
+
+#@auth.requires_login()
 def t_room_type_manage():
-    form = SQLFORM.smartgrid(db.t_t_room_type,onupdate=auth.archive)
-    return locals()
-
+    form = SQLFORM(db.t_room_type)
+    # .smartgrid(db.t_t_building,onupdate=auth.archive)
+    if form.process().accepted:
+        response.flash = 'form accepted';
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form)

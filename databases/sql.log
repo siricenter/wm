@@ -831,3 +831,13 @@ ALTER TABLE t_user_info_archive ADD f_user_id INTEGER REFERENCES auth_user (id) 
 success!
 success!
 success!
+timestamp: 2014-06-19T18:39:26.563059
+ALTER TABLE t_user_info ADD f_firstname CHAR(512);
+timestamp: 2014-06-19T18:39:26.681831
+ALTER TABLE t_user_info ADD f_lastname CHAR(512);
+success!
+timestamp: 2014-06-19T18:39:26.835243
+ALTER TABLE t_user_info_archive ADD f_firstname CHAR(512);
+timestamp: 2014-06-19T18:39:26.980311
+ALTER TABLE t_user_info_archive ADD f_lastname CHAR(512);
+success!

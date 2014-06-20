@@ -186,11 +186,7 @@ db.define_table('t_room_archive',db.t_room,Field('current_record','reference t_r
 ########################################
 db.define_table('t_user_info',
 	Field('f_user_id', type='references auth_user',
-          label=T('user_id')),
-    Field('f_firstname', type='string',
-          label=T('First Name')),
-    Field('f_lastname', type='string',
-          label=T('Last Name')),
+          label=T('Phone')),
     Field('f_phone', type='string',
           label=T('Phone')),
     Field('f_address1', type='string',
