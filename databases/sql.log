@@ -841,3 +841,9 @@ ALTER TABLE t_user_info_archive ADD f_firstname CHAR(512);
 timestamp: 2014-06-19T18:39:26.980311
 ALTER TABLE t_user_info_archive ADD f_lastname CHAR(512);
 success!
+timestamp: 2014-06-24T10:07:39.664000
+ALTER TABLE t_user_info ADD f_middlename CHAR(512);
+success!
+timestamp: 2014-06-24T10:07:39.911000
+ALTER TABLE t_user_info_archive ADD f_middlename CHAR(512);
+success!
