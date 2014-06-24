@@ -5,7 +5,7 @@ def download(): return response.download(request,db)
 def call(): return service()
 ### end requires
 def index():
-    return dict()
+	return dict()
 
 def error():
     return dict()
@@ -62,23 +62,46 @@ def room_manage():
 def room_type_manage():
     return dict()
 #This is the tenant registration form
-def registration_form():
-    form=FORM('First name:', INPUT(_name='fName', requires=IS_NOT_EMPTY()),
-              'Last name:', INPUT(_name='lName', requires=IS_NOT_EMPTY()),
-              'Gender:', INPUT(_name='gender', requires=IS_NOT_EMPTY()),
-              'Current address:', INPUT(_name='cAddress', requires=IS_NOT_EMPTY()),
-              'Current city:', INPUT(_name='cCity', requires=IS_NOT_EMPTY()),
-              'Current state:', INPUT(_name='pState', requires=IS_NOT_EMPTY()),
-              'Zip:', INPUT(_name='zip', requires=IS_NOT_EMPTY()),
-              INPUT(_type='submit'))
-    if form.accepts(request,session):
-        response.flash = 'form accepted'
-        process_registration(form)
-    elif form.errors:
-        response.flash = 'form has errors'
-    else:
-        response.flash = 'please fill the form'
-    return dict(form=form)
+# def registration():
+#     form=FORM('First name:', INPUT(_name='fName', requires=IS_NOT_EMPTY()),
+#               'Middle name:', INPUT(_name='mName'),
+#               'Last name:', INPUT(_name='lName', requires=IS_NOT_EMPTY()),
+#               'Gender:', INPUT(_name='gender', requires=IS_NOT_EMPTY()),
+#               'Address:', INPUT(_name='address', requires=IS_NOT_EMPTY()),
+#               'City:', INPUT(_name='city', requires=IS_NOT_EMPTY()),
+#               'State:', INPUT(_name='state', requires=IS_NOT_EMPTY()),
+#               'Zip Code:', INPUT(_name='zip', requires=IS_NOT_EMPTY()),
+#               'Phone #:', INPUT(_name='phone', requires=IS_NOT_EMPTY()),
+#               INPUT(_type='submit'))
+#     if form.accepts(request,session):
+#         response.flash = 'form accepted'
+#         process_registration(form)
+#     elif form.errors:
+#         response.flash = 'form has errors'
+#     else:
+#         response.flash = 'please fill the form'
+#     return dict(form=form)
+
+def registration():
+	form = SQLFORM(db.t_user_info,
+					fields= ['f_firstname'
+							,'f_middlename'
+							,'f_lastname'
+							,'f_gender'
+							,'f_address1'
+							,'f_address2'
+							,'f_city'
+							,'f_state'
+							,'f_zip'
+							,'f_country'])
+	if form.accepts(request,session):
+		response.flash = 'form accepted'
+		process_registration(form)
+	elif form.errors:
+		response.flash = 'form has errors'
+	else:
+		response.flash = 'please fill the form'
+	return dict(form=form)
 
 # This function processes the registration form and add the data to the database
 def process_registration(form):
@@ -92,6 +115,14 @@ def process_registration(form):
 def display_full_contract(id):
     return
 
+# About us page
+def about():
+	return dict()
+
+# Contact page
+def contact():
+	return dict()
+	
 #@auth.requires_login()
 def t_building_manage():
     form = SQLFORM(db.t_building)
