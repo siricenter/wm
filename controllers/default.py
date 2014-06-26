@@ -82,27 +82,35 @@ def room_type_manage():
 #         response.flash = 'please fill the form'
 #     return dict(form=form)
 
-def registration():
-	form = SQLFORM(db.t_user_info,
-					fields= ['f_firstname'
-							,'f_middlename'
-							,'f_lastname'
-							,'f_gender'
-							,'f_address1'
-							,'f_address2'
-							,'f_city'
-							,'f_state'
-							,'f_zip'
-							,'f_country'])
-	if form.accepts(request,session):
-		response.flash = 'form accepted'
-		process_registration(form)
-	elif form.errors:
-		response.flash = 'form has errors'
-	else:
-		response.flash = 'please fill the form'
-	return dict(form=form)
+# def registration():
+# 	form = SQLFORM(db.t_user_info,
+# 					fields= ['f_firstname'
+# 							,'f_middlename'
+# 							,'f_lastname'
+# 							,'f_gender'
+# 							,'f_address1'
+# 							,'f_address2'
+# 							,'f_city'
+# 							,'f_state'
+# 							,'f_zip'
+# 							,'f_country'])
+# 	if form.accepts(request,session):
+# 		response.flash = 'form accepted'
+# 		process_registration(form)
+# 	elif form.errors:
+# 		response.flash = 'form has errors'
+# 	else:
+# 		response.flash = 'please fill the form'
+# 	return dict(form=form,form2=form2)
 
+def registration():
+ 	form = SQLFORM.factory(db.t_user_info
+					,db.t_building
+					,db.t_apartment
+					,db.t_room
+					,db.t_semester)
+	return dict(form=form)
+	
 # This function processes the registration form and add the data to the database
 def process_registration(form):
     user_t = t_user_info_manage()
