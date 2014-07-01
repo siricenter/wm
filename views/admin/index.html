@@ -4,13 +4,10 @@
 
 <div>
 <section>
-	
 	<ul>
-		<li>Buildings</li>
-		<li>Floors</li>
-		<li>Rooms</li>
-		<li>Parking</li>
-		<li>Tenants</li>
+	{{for x in range(len(links)):}}
+		<li>{{=A(links[x], callback=URL('myaction'))}}</li>
+	{{pass}}
 	</ul>
 </section>
 <section>
