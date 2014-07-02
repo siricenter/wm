@@ -5,7 +5,7 @@ response.meta.keywords = settings.keywords
 response.meta.description = settings.description
 response.menu = [
 (T('Home'),URL('default','index')==URL(),URL('default','index'),[]),
-(T('Contracts'),URL('default','contract')==URL(),URL('default','contract'),[]),
+(T('Registration'),URL('default','registration')==URL(),URL('default','registration'),[]),
 (T('About'),URL('default','about')==URL(),URL('default','about'),[]),
 (T('Contact'),URL('default','contact')==URL(),URL('default','contact'),[]),
 #(T('Building'),URL('default','building_manage')==URL(),URL('default','building_manage'),[]),

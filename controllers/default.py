@@ -61,62 +61,12 @@ def room_manage():
 @auth.requires_login()
 def room_type_manage():
     return dict()
-#This is the tenant registration form
-# def registration():
-#     form=FORM('First name:', INPUT(_name='fName', requires=IS_NOT_EMPTY()),
-#               'Middle name:', INPUT(_name='mName'),
-#               'Last name:', INPUT(_name='lName', requires=IS_NOT_EMPTY()),
-#               'Gender:', INPUT(_name='gender', requires=IS_NOT_EMPTY()),
-#               'Address:', INPUT(_name='address', requires=IS_NOT_EMPTY()),
-#               'City:', INPUT(_name='city', requires=IS_NOT_EMPTY()),
-#               'State:', INPUT(_name='state', requires=IS_NOT_EMPTY()),
-#               'Zip Code:', INPUT(_name='zip', requires=IS_NOT_EMPTY()),
-#               'Phone #:', INPUT(_name='phone', requires=IS_NOT_EMPTY()),
-#               INPUT(_type='submit'))
-#     if form.accepts(request,session):
-#         response.flash = 'form accepted'
-#         process_registration(form)
-#     elif form.errors:
-#         response.flash = 'form has errors'
-#     else:
-#         response.flash = 'please fill the form'
-#     return dict(form=form)
 
-# def registration():
-# 	form = SQLFORM(db.t_user_info,
-# 					fields= ['f_firstname'
-# 							,'f_middlename'
-# 							,'f_lastname'
-# 							,'f_gender'
-# 							,'f_address1'
-# 							,'f_address2'
-# 							,'f_city'
-# 							,'f_state'
-# 							,'f_zip'
-# 							,'f_country'])
-# 	if form.accepts(request,session):
-# 		response.flash = 'form accepted'
-# 		process_registration(form)
-# 	elif form.errors:
-# 		response.flash = 'form has errors'
-# 	else:
-# 		response.flash = 'please fill the form'
-# 	return dict(form=form,form2=form2)
-
-def registration():
- 	form = SQLFORM.factory(db.t_user_info
-					,db.t_building
-					,db.t_apartment
-					,db.t_room
-					,db.t_semester)
-	return dict(form=form)
-	
-# This function processes the registration form and add the data to the database
-def process_registration(form):
-    user_t = t_user_info_manage()
-    user_t.vars.firstname = form.vars.fname
-    response.flash = user_t.vars.firstname
-    return dict(table = user_t)
+def contract():
+    form = SQLFORM.factory(db.t_user_info)
+    form += SQLFORM.factory(db.t_apartment)
+    form += SQLFORM.factory(db.t_building)
+    return dict(form=form)
 
 #  NOT FINISHED
 # this function is to display a contract in a printable format
@@ -130,8 +80,8 @@ def about():
 # Contact page
 def contact():
 	return dict()
-	
-#@auth.requires_login()
+
+@auth.requires_login()
 def t_building_manage():
     form = SQLFORM(db.t_building)
     if form.process().accepted:
@@ -142,7 +92,7 @@ def t_building_manage():
         response.flash = 'please fill out the form'
     return dict(form=form)
 
-#@auth.requires_login()
+@auth.requires_login()
 def t_floor_manage():
     form = SQLFORM(db.t_floor)
     if form.process().accepted:
@@ -153,7 +103,7 @@ def t_floor_manage():
         response.flash = 'please fill out the form'
     return dict(form=form)
 
-#@auth.requires_login()
+@auth.requires_login()
 def t_apartment_manage():
     form = SQLFORM(db.t_apartment)
     # .smartgrid(db.t_t_building,onupdate=auth.archive)
@@ -165,7 +115,7 @@ def t_apartment_manage():
         response.flash = 'please fill out the form'
     return dict(form=form)
 
-#@auth.requires_login()
+@auth.requires_login()
 def t_apartment_type_manage():
     form = SQLFORM(db.t_apartment_type)
     if form.process().accepted:
@@ -177,12 +127,12 @@ def t_apartment_type_manage():
     return dict(form=form)
 
 
-#@auth.requires_login()
+@auth.requires_login()
 def t_user_info_manage():
     form = SQLFORM(db.t_user_info)
     return form
 
-#@auth.requires_login()
+@auth.requires_login()
 def t_contract_manage():
     form = SQLFORM(db.t_contract)
     # .smartgrid(db.t_t_building,onupdate=auth.archive)
@@ -194,7 +144,7 @@ def t_contract_manage():
         response.flash = 'please fill out the form'
     return dict(form=form)
 
-#@auth.requires_login()
+@auth.requires_login()
 def t_semester_manage():
     form = SQLFORM(db.t_semester)
     # .smartgrid(db.t_t_building,onupdate=auth.archive)
@@ -207,7 +157,7 @@ def t_semester_manage():
     return dict(form=form)
 
 
-#@auth.requires_login()
+@auth.requires_login()
 def t_parking_manage():
     form = SQLFORM(db.t_parking)
     # .smartgrid(db.t_t_building,onupdate=auth.archive)
@@ -219,7 +169,7 @@ def t_parking_manage():
         response.flash = 'please fill out the form'
     return dict(form=form)
 
-#@auth.requires_login()
+@auth.requires_login()
 def t_request_manage():
     form = SQLFORM(db.t_request)
     # .smartgrid(db.t_t_building,onupdate=auth.archive)
@@ -232,7 +182,7 @@ def t_request_manage():
     return dict(form=form)
 
 
-#@auth.requires_login()
+@auth.requires_login()
 def t_request_comments_manage():
     form = SQLFORM(db.t_request_comments)
     # .smartgrid(db.t_t_building,onupdate=auth.archive)
@@ -245,7 +195,7 @@ def t_request_comments_manage():
     return dict(form=form)
 
 
-#@auth.requires_login()
+@auth.requires_login()
 def t_request_type_manage():
     form = SQLFORM(db.t_request_type)
     # .smartgrid(db.t_t_building,onupdate=auth.archive)
@@ -257,7 +207,7 @@ def t_request_type_manage():
         response.flash = 'please fill out the form'
     return dict(form=form)
 
-#@auth.requires_login()
+@auth.requires_login()
 def t_room_manage():
     form = SQLFORM(db.t_room)
     # .smartgrid(db.t_t_building,onupdate=auth.archive)
@@ -270,7 +220,7 @@ def t_room_manage():
     return dict(form=form)
 
 
-#@auth.requires_login()
+@auth.requires_login()
 def t_room_type_manage():
     form = SQLFORM(db.t_room_type)
     # .smartgrid(db.t_t_building,onupdate=auth.archive)

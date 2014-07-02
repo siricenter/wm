@@ -1,5 +1,8 @@
 ### we prepend t_ to tablenames and f_ to fieldnames for disambiguity
-
+from gluon.tools import Auth
+auth = Auth(db)
+auth.define_tables(username=False,signature=False)
+auth.settings.register_onaccept.append(auth.add_membership(4,  auth.user.id))
 
 ########################################
 db.define_table('t_semester',
