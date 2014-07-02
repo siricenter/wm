@@ -2,15 +2,15 @@
 
 <h1>Welcome {{=username.capitalize()}}!</h1>
 
-<div>
+<div class="admin">
 <section id="nav">
 	<ul>
 	{{for x in range(len(links)):}}
-		<li>{{=A(links[x], callback=URL('myaction'))}}</li>
+		<li class="btn">{{=A(links[x], callback=URL('myaction'))}}</li>
 	{{pass}}
 	</ul>
 </section>
-<section>
+<section id="dataView">
 	
 </section>
 </div>
