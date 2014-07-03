@@ -11,3 +11,7 @@ def index():
 	links = ['Builings','Floors','Rooms','Parking','Tenants']
 	return locals()
 	
+import Admin
+def displayQuery():
+	myAdmin = AdminStuff(4,5)
+	return dict(myAdmin = myAdmin)
