@@ -1,3 +1,35 @@
+div.admin{
+	display: flex;
+}
+body[role=admin] section{
+	border: solid 1px black;
+	padding: 5px;
+}
+body[role=admin] section[id="nav"]{
+	width: 10%;
+	min-width: 100px;
+}
+body[role=admin] section[id="nav"] ul{
+	margin: 0;
+}
 body[role=admin] section[id="nav"] li{
 	list-style: none;
+	display: block;
+	margin-bottom: 5px;
+}
+body[role=admin] section[id="nav"] li:last-child{
+	margin-bottom: 0px;
+}
+body[role=admin] section[id="nav"] a{
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+}
+body[role=admin] section[id="nav"] li:hover a{
+	color: orange;
+}
+body[role=admin] section[id="dataView"]{
+	width: 90%;
+	min-width: 300px;
+	padding: 5px;
 }

@@ -8,6 +8,10 @@ def call(): return service()
 @auth.requires_login()
 def index():
 	username = auth.user.first_name;
-	links = ['Builings','Floors','Rooms','Parking','Tenants']
+	links = ['buildings','floors','rooms','parking','tenants']
 	return locals()
 	
+import Admin
+def displayQuery():
+	myAdmin = AdminStuff(4,5)
+	return dict(myAdmin = myAdmin)
