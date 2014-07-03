@@ -1,4 +1,7 @@
 {{extend 'adminlayout.html'}}
+<script>
+	
+</script>
 
 <h1>Welcome {{=username.capitalize()}}!</h1>
 
@@ -6,11 +9,11 @@
 <section id="nav">
 	<ul>
 	{{for x in range(len(links)):}}
-		<li class="btn">{{=A(links[x], callback=URL('myaction'))}}</li>
+		<li id={{=links[x]}} class="btn adminLinks" onclick="getQuery(this.id)">{{=A(links[x].title())}}</li>
 	{{pass}}
 	</ul>
 </section>
 <section id="dataView">
-	
+	<div id="myDiv"><h2>Let AJAX change this text</h2></div>
 </section>
 </div>
