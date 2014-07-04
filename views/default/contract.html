@@ -1,0 +1,60 @@
+{{extend 'layout.html'}}
+
+<h2>Contract</h2>
+
+	<h4>About you</h4>
+	<div class="row">
+		
+		<div class="span2"><lable>First Name: </lable></div>
+		<div class="span10"><input type="text" name="fName"/></div>
+		
+		<div class="span2"><lable>Last Name: </lable></div>
+		<div class="span10"><input type="text" name="lName"/></div>
+		
+		<div class="span2"><lable>Current Address: </lable></div>
+		<div class="span10"><input type="text" name="lName"/></div>
+		
+		<div class="span2"><lable>Phone: </lable></div>
+		<div class="span10"><input type="text" name="phone"/></div>
+		
+		<div class="span2"><lable>BYU-Email: </lable></div>
+		<div class="span10"><input type="text" name=""/></div>
+
+	</div>
+	
+	<h4>Housing options</h4>
+	<div class="row">	
+
+		<div class="span2"><lable>Gender: </lable></div>
+		<div class="span10">
+			<select name="gender">
+				<option style="display:none"></option>
+				<option>Male</option>
+				<option>Female</option>
+			</select>
+		</div>
+
+		<div class="span2"><lable>Semester: </lable></div>
+		<div class="span1"><input type="checkbox" name="semester" value="fall"/>Fall</div>
+		<div class="span9">Year<input type="text" placeholder="yyyy" pattern="[0-9]{4}"
+								size="4" maxlength="4" name="fallYear"/><br/></div>
+		
+		<div class="span2"></div>
+		<div class="span1"><input type="checkbox" name="semester" value="winter"/>Winter</div>
+	 	<div class="span9">Year<input type="text" placeholder="yyyy" pattern="[0-9]{4}"
+								size="4" maxlength="4" name="winterYear"/><br/></div>
+		
+		<div class="span2"><lable></lable></div>
+		<div class="span1"><input type="checkbox" name="semester" value="spring"/>Spring</div>
+		<div class="span9">Year<input type="text" placeholder="yyyy" pattern="[0-9]{4}"
+								size="4" maxlength="4" name="springYear"/><br/></div>
+		
+		<div class="span2"></div>
+		<div class="span1"><input type="checkbox" name="semester" value="summer"/>Summer</div>
+	 	<div class="span9">Year<input type="text" placeholder="yyyy" pattern="[0-9]{4}"
+								size="4" maxlength="4" name="summerYear"/><br/></div>
+
+	</div>
+
+
+<p>Contact Us</p>
