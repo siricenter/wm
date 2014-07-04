@@ -2,7 +2,7 @@
 from gluon.tools import Auth
 auth = Auth(db)
 auth.define_tables(username=False,signature=False)
-auth.settings.register_onaccept.append(auth.add_membership(4,  auth.user.id))
+
 
 ########################################
 db.define_table('t_semester',

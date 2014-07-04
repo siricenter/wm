@@ -63,10 +63,10 @@ def room_type_manage():
     return dict()
 
 def contract():
-    form = SQLFORM.factory(db.t_user_info)
-    form += SQLFORM.factory(db.t_apartment)
-    form += SQLFORM.factory(db.t_building)
-    return dict(form=form)
+    #form = SQLFORM.factory(db.t_user_info)
+    #form += SQLFORM.factory(db.t_apartment)
+    #form += SQLFORM.factory(db.t_building)
+    return dict()
 
 #  NOT FINISHED
 # this function is to display a contract in a printable format

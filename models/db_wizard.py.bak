@@ -3,6 +3,7 @@ from gluon.tools import Auth
 auth = Auth(db)
 auth.define_tables(username=False,signature=False)
 
+
 ########################################
 db.define_table('t_semester',
     Field('f_start_date', type='date',
