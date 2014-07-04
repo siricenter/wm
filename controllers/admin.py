@@ -9,9 +9,14 @@ def call(): return service()
 def index():
 	username = auth.user.first_name;
 	links = ['buildings','floors','rooms','parking','tenants']
+	results = manageUsers()
 	return locals()
 	
 import Admin
 def displayQuery():
 	myAdmin = AdminStuff(4,5)
 	return dict(myAdmin = myAdmin)
+	
+def manageUsers():
+	grid = SQLFORM.grid(db.auth_user)
+	return locals()
