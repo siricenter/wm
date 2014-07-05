@@ -2,6 +2,8 @@
 
 <h2>Contract</h2>
 
+<div id='temp'></div>
+<form action="" method="get">
 	<h4>About you</h4>
 	<div class="row">
 		
@@ -12,7 +14,7 @@
 		<div class="span10"><input type="text" name="lName"/></div>
 		
 		<div class="span2"><lable>Current Address: </lable></div>
-		<div class="span10"><input type="text" name="lName"/></div>
+		<div class="span10"><input type="text" name="cAddress"/></div>
 		
 		<div class="span2"><lable>Phone: </lable></div>
 		<div class="span10"><input type="text" name="phone"/></div>
@@ -27,34 +29,79 @@
 
 		<div class="span2"><lable>Gender: </lable></div>
 		<div class="span10">
-			<select name="gender">
-				<option style="display:none"></option>
-				<option>Male</option>
-				<option>Female</option>
-			</select>
+			<input type ="radio" name="gender" value="male"/>Male<br/>
+			<input type ="radio" name="gender" value="female"/>Female<br/><br/>
 		</div>
+
 
 		<div class="span2"><lable>Semester: </lable></div>
 		<div class="span1"><input type="checkbox" name="semester" value="fall"/>Fall</div>
-		<div class="span9">Year<input type="text" placeholder="yyyy" pattern="[0-9]{4}"
-								size="4" maxlength="4" name="fallYear"/><br/></div>
+		<div class="span9">Year			
+			<select name="fallYear">
+				<option style="display:none"></option>
+				<option value="{{=year}}">{{=year}}</option>
+				<option value="{{=year+1}}">{{=year+1}}</option>
+			</select><br/>
+		</div>
 		
 		<div class="span2"></div>
 		<div class="span1"><input type="checkbox" name="semester" value="winter"/>Winter</div>
-	 	<div class="span9">Year<input type="text" placeholder="yyyy" pattern="[0-9]{4}"
-								size="4" maxlength="4" name="winterYear"/><br/></div>
+		<div class="span9">Year			
+			<select name="winterYear">
+				<option style="display:none"></option>
+				<option value="{{=year}}">{{=year}}</option>
+				<option value="{{=year+1}}">{{=year+1}}</option>
+			</select><br/>
+		</div>
 		
 		<div class="span2"><lable></lable></div>
 		<div class="span1"><input type="checkbox" name="semester" value="spring"/>Spring</div>
-		<div class="span9">Year<input type="text" placeholder="yyyy" pattern="[0-9]{4}"
-								 maxlength="4" name="springYear"/><br/></div>
+		<div class="span9">Year			
+			<select name="springYear">
+				<option style="display:none"></option>
+				<option value="{{=year}}">{{=year}}</option>
+				<option value="{{=year+1}}">{{=year+1}}</option>
+			</select><br/>
+		</div>
 		
 		<div class="span2"></div>
 		<div class="span1"><input type="checkbox" name="semester" value="summer"/>Summer</div>
-	 	<div class="span9">Year<input type="text" placeholder="yyyy" pattern="[0-9]{4}"
-								size="4" maxlength="4" name="summerYear"/><br/></div>
+		<div class="span9">Year			
+			<select name="summerYear">
+				<option style="display:none"></option>
+				<option value="{{=year}}">{{=year}}</option>
+				<option value="{{=year+1}}">{{=year+1}}</option>
+			</select><br/>
+		</div>
 
+		<div class="span12"><input type="button" onclick="send()" value="submit"/></div>
 	</div>
+</form>
 
-
+<br/>
 <p>Contact Us</p>
+
+<script type="text/javascript">
+
+function send()
+{
+	// get vars
+	var fname = $('[name=fName]').value;
+	document.getElementById('temp').innerHTML = fname;
+	// put in JSON
+	// send via ajax
+	// load confirmation page into html
+	//var DTO = { 'testObject' : testObject };
+
+	//var data = $.toJSON(DTO);    //Using the toJSON plugin by Mark Gibson
+
+ 	/*$.ajax({
+    	type: 'POST',
+    	url: '/Myapplication/controllers/jsontest.json',
+    	contentType: "application/json; charset=utf-8", 
+    	data: data,
+    	dataType: 'json',
+		success:  function(data){  alert('yay'); }
+	});*/
+}
+</script>
