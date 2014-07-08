@@ -11,8 +11,6 @@ from datetime import date
 def index():
 	username = auth.user.first_name;
 	links = ['buildings','floors','rooms','parking','tenants']
-	query = db.auth_user
-	grid = SQLFORM.grid(query=query)
 	return locals()
 
 @auth.requires_login()	
@@ -20,3 +18,6 @@ def manageUsers():
 	query = db.auth_user
 	grid = SQLFORM.grid(query=query)
 	return grid
+
+def test():
+	return request.vars.name
