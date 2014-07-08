@@ -17,19 +17,23 @@ body[role=admin] section[id="nav"] li{
 	display: block;
 	margin-bottom: 5px;
 }
-body[role=admin] section[id="nav"] li:last-child{
+body[role=admin] section[id="nav"]form li:last-child{
 	margin-bottom: 0px;
 }
-body[role=admin] section[id="nav"] a{
+body[role=admin] section[id="nav"] form li {
 	text-decoration: none;
+	text-align: left;
 	color: black;
 	font-weight: bold;
 }
-body[role=admin] section[id="nav"] li:hover a{
+body[role=admin] section[id="nav"] form li input{
+	margin: 0 5px 2px 0;
+}
+body[role=admin] section[id="nav"] form li:hover {
 	color: orange;
 }
 body[role=admin] section[id="dataView"]{
-	width: 90%;
+	width: 85%;
 	min-width: 300px;
 	padding: 5px;
 }
