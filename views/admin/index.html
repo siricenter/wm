@@ -1,6 +1,41 @@
 {{extend 'adminlayout.html'}}
 <script>
+	//toggle check boxes
+	function toggle(id){
+		if(document.getElementById(id).firstElementChild.checked !=true){
+			document.getElementById(id).firstElementChild.checked = true;
+		}else{
+			document.getElementById(id).firstElementChild.checked = false;
+		}
+	}
+	//getQuery class
+	var query = function(){
+		this.params = new Array();
+	}
+	//get query parameters from anything with class "selection"
+	query.prototype.setChildren = function(){
+		var list = document.querySelectorAll('.selection');
+		for(var i = 0; i < list.length; i++){
+			if(document.getElementById(list[i].id).firstElementChild.checked == true){
+				this.params[i] = document.getElementById(list[i].id).firstElementChild.value;
+			}
+		}
+		if(this.params.length <= 0){
+			throw new Error("Selection list empty!");
+		}
+	}
+	//return params
+	query.prototype.getParams = function(){
+		return this.params;
+	}
+	//executeQuery does all the goodness
+	function executeQuery(){
+		var execute = new query();
+		execute.setChildren();
+		return execute.getParams();
+	}
 	
+	var test = executeQuery();
 </script>
 
 <h1>Welcome {{=username.capitalize()}}!</h1>
@@ -12,7 +47,8 @@
 	{{for x in range(len(links)):}}
 		<li class="btn selection" id={{=links[x]}} onclick="toggle(this.id)"><input type="checkbox" name={{=links[x]}} value={{=links[x]}}>{{=links[x].title()}}</li>
 	{{pass}}
-	<li class="btn" onclick="executeQuery()">Execute</li>
+	<!--<li class="btn" onclick="executeQuery()">Execute</li>-->
+	<li class="btn" onclick="ajax('{{=URL('admin', 'test')}}', name='fgsdfgsd', target='myDiv')">Execute</li>
 	</ul>
 	</form>
 </section>
