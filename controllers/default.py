@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 ### required - do no delete
+from datetime import date
+
 def user(): return dict(form=auth())
 def download(): return response.download(request,db)
 def call(): return service()
@@ -66,7 +68,7 @@ def contract():
     #form = SQLFORM.factory(db.t_user_info)
     #form += SQLFORM.factory(db.t_apartment)
     #form += SQLFORM.factory(db.t_building)
-    return dict()
+    return dict(year=(date.today().year))
 
 #  NOT FINISHED
 # this function is to display a contract in a printable format

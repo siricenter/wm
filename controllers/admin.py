@@ -5,18 +5,17 @@ def download(): return response.download(request,db)
 def call(): return service()
 ### end requires
 
+from datetime import date
+
 @auth.requires_login()
 def index():
 	username = auth.user.first_name;
 	links = ['buildings','floors','rooms','parking','tenants']
-	results = manageUsers()
+	query = db.auth_user
+	grid = SQLFORM.grid(query=query)
 	return locals()
 	
 import Admin
 def displayQuery():
 	myAdmin = AdminStuff(4,5)
 	return dict(myAdmin = myAdmin)
-	
-def manageUsers():
-	grid = SQLFORM.grid(db.auth_user)
-	return locals()
