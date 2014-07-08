@@ -17,14 +17,16 @@ body[role=admin] section[id="nav"] li{
 	display: block;
 	margin-bottom: 5px;
 }
-body[role=admin] section[id="nav"]form li:last-child{
-	margin-bottom: 0px;
-}
 body[role=admin] section[id="nav"] form li {
 	text-decoration: none;
 	text-align: left;
 	color: black;
 	font-weight: bold;
+}
+body[role=admin] section[id="nav"] form ul li:last-child{
+	margin-bottom: 0px;
+	text-align: center;
+	background-image: linear-gradient(to bottom, #8F8F8F, #FFE6E6);
 }
 body[role=admin] section[id="nav"] form li input{
 	margin: 0 5px 2px 0;
