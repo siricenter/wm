@@ -1,12 +1,6 @@
 {{extend 'adminlayout.html'}}
 <script>
-	function toggle(id){
-		if(document.getElementById(id).firstElementChild.checked !=true){
-			document.getElementById(id).firstElementChild.checked = true;
-		}else{
-			document.getElementById(id).firstElementChild.checked = false;
-		}
-	}
+	
 </script>
 
 <h1>Welcome {{=username.capitalize()}}!</h1>
@@ -18,6 +12,7 @@
 	{{for x in range(len(links)):}}
 		<li class="btn selection" id={{=links[x]}} onclick="toggle(this.id)"><input type="checkbox" name={{=links[x]}} value={{=links[x]}}>{{=links[x].title()}}</li>
 	{{pass}}
+	<li class="btn" onclick="executeQuery()">Execute</li>
 	</ul>
 	</form>
 </section>
