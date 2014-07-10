@@ -10,7 +10,7 @@ from datetime import date
 @auth.requires_login()
 def index():
 	username = auth.user.first_name;
-	links = ['buildings','floors','rooms','parking','tenants']
+	links = ['buildings','floors','rooms','parking','tenants','users']
 	return locals()
 
 @auth.requires_login()	

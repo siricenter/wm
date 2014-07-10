@@ -46,7 +46,7 @@
 	function test(){
 	var tester = executeQuery();
     $.ajax({
-        url: "admin/testing",
+        url: "testing",
         datatype: "json",
 		data: "array="+JSON.stringify(tester),
         success: function(data){ return $('#myDiv').html(data) }
@@ -67,7 +67,7 @@
 	
 	<!--<li class="btn" onclick="executeQuery()">Execute</li>-->
 	<!-- put the ajax in a function! -->
-	<li class="btn"  onclick="test()">Execute</li>
+	<li class="btn" onclick="test()">Execute</li>
 	</ul>
 	</form>
 </section>
