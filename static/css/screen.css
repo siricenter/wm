@@ -6,8 +6,8 @@ body[role=admin] section{
 	padding: 5px;
 }
 body[role=admin] section[id="nav"]{
-	width: 10%;
-	min-width: 100px;
+	width: 20%;
+	max-width: 20%;
 }
 body[role=admin] section[id="nav"] ul{
 	margin: 0;
