@@ -17,7 +17,7 @@
 		var list = document.querySelectorAll('.selection');
 		for(var i = 0; i < list.length; i++){
 			if(document.getElementById(list[i].id).firstElementChild.checked == true){
-				this.params[i] = document.getElementById(list[i].id).firstElementChild.value;
+				this.params.push(document.getElementById(list[i].id).firstElementChild.value);		
 			}
 		}
 		if(this.params.length <= 0){
@@ -32,10 +32,27 @@
 	function executeQuery(){
 		var execute = new query();
 		execute.setChildren();
+		//alert(execute.getParams());
 		return execute.getParams();
+		
 	}
 	
-	var test = executeQuery();
+
+	
+	function testing(){
+		ajax('{{=URL("admin", "test")}}', ['tester'], 'myDiv');
+	}
+	
+	function test(){
+	var tester = executeQuery();
+    $.ajax({
+        url: "admin/testing",
+        datatype: "json",
+		data: "array="+JSON.stringify(tester),
+        success: function(data){ return $('#myDiv').html(data) }
+        });
+    }
+	
 </script>
 
 <h1>Welcome {{=username.capitalize()}}!</h1>
@@ -47,9 +64,10 @@
 	{{for x in range(len(links)):}}
 		<li class="btn selection" id={{=links[x]}} onclick="toggle(this.id)"><input type="checkbox" name={{=links[x]}} value={{=links[x]}}>{{=links[x].title()}}</li>
 	{{pass}}
+	
 	<!--<li class="btn" onclick="executeQuery()">Execute</li>-->
-	<li class="btn" onclick="ajax('{{=URL('admin', 'test')}}', name='fgsdfgsd', target='myDiv')">Execute</li>
-	<li class="btn" onclick="ajax('{{=URL('admin', 'test')}}', name='fgsdfgsd', target='myDiv')">Execute</li>
+	<!-- put the ajax in a function! -->
+	<li class="btn"  onclick="test()">Execute</li>
 	</ul>
 	</form>
 </section>
