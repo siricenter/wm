@@ -23,4 +23,5 @@ def test():
     return request.vars.tester
 	
 def testing():
-	return request.vars.array
+	list = response.json(db.tables)
+	return list
