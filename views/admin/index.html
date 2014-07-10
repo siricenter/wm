@@ -46,12 +46,20 @@
 	function test(){
 	var tester = executeQuery();
     $.ajax({
-        url: "testing",
+        url: "tables",
         datatype: "json",
 		data: "array="+JSON.stringify(tester),
         success: function(data){ 
-				//var counter = data.length;
-				return $('#myDiv').html(JSON.stringify(data))
+				var tables = new Array();
+				tables = (data);
+				var result = false;
+				if(tables instanceof Array){
+					result = true;
+				}else{
+					alert('no');
+				}
+				
+				return $('#myDiv').html(tables)
 			}
         });
     }
@@ -77,5 +85,17 @@
 <section id="dataView">
 	{{=A('manageUser', callback=URL('manageUsers'), target='myDiv')}}
 	<div id="myDiv"><h2>Let AJAX change this text</h2></div>
+	<ul>
+	{{import re
+		tables = []}}
+	{{for x in range(len(list)):
+		match = re.search('archive',list[x])
+		if not match:
+			list[x] = list[x].replace('auth_','').replace('_',' ')
+			tables.append(list[x])
+			continue}}
+	{{pass}}
+	<li>{{=tables}}</li>
+	</ul>
 </section>
 </div>
