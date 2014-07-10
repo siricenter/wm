@@ -12,8 +12,16 @@ from gluon.serializers import json
 @auth.requires_login()
 def index():
 	username = auth.user.first_name;
-	links = ['buildings','floors','rooms','parking','tenants','users']
 	list = db.tables
+	tables = []
+	for x in range(len(list)):
+		match = re.search('archive',list[x])
+		if not match:
+			list[x] = list[x].replace('auth_','')
+			list[x] = re.sub('^t_', '', list[x])
+			list[x] = list[x].replace('_',' ')
+			tables.append(list[x].title())
+			continue
 	return locals()
 
 @auth.requires_login()	
@@ -28,15 +36,18 @@ def test():
 import re
 def tables():
 	list = db.tables
+	tables = []
 	for x in range(len(list)):
 		match = re.search('archive',list[x])
 		if not match:
-			list[x] = list[x].replace('auth_','').replace('_',' ')
+			list[x] = list[x].replace('auth_','')
+			list[x] = re.sub('^t_', '', list[x])
+			list[x] = list[x].replace('_',' ')
+			tables.append(list[x].title())
 			continue
-	return response.json(list)
+	return response.json(tables)
 	
 def testing():
 	list = db.tables
-
 	return response.json(list)
 	

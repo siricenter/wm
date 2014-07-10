@@ -72,8 +72,8 @@
 <section id="nav">
 	<form>
 	<ul>
-	{{for x in range(len(links)):}}
-		<li class="btn selection" id={{=links[x]}} onclick="toggle(this.id)"><input type="checkbox" name={{=links[x]}} value={{=links[x]}}>{{=links[x].title()}}</li>
+	{{for x in range(len(tables)):}}
+		<li class="btn selection" id={{=tables[x]}} onclick="toggle(this.id)"><input type="checkbox" name={{=tables[x]}} value={{=tables[x]}}>{{=tables[x].title()}}</li>
 	{{pass}}
 	
 	<!--<li class="btn" onclick="executeQuery()">Execute</li>-->
@@ -91,8 +91,10 @@
 	{{for x in range(len(list)):
 		match = re.search('archive',list[x])
 		if not match:
-			list[x] = list[x].replace('auth_','').replace('_',' ')
-			tables.append(list[x])
+			list[x] = list[x].replace('auth_','')
+			list[x] = re.sub('^t_', '', list[x])
+			list[x] = list[x].replace('_',' ')
+			tables.append(list[x].title())
 			continue}}
 	{{pass}}
 	<li>{{=tables}}</li>
