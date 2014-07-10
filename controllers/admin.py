@@ -20,4 +20,7 @@ def manageUsers():
 	return grid
 
 def test():
-	return request.vars.lala
+    return request.vars.tester
+	
+def testing():
+	return request.vars.array
