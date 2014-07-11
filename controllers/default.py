@@ -233,3 +233,10 @@ def t_room_type_manage():
     else:
         response.flash = 'please fill out the form'
     return dict(form=form)
+
+def getAvailables():
+    request.vars.year
+    request.vars.type
+    request.vars.gender
+    request.vars.semester
+    return 100;
