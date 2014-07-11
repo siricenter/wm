@@ -235,8 +235,9 @@ def t_room_type_manage():
     return dict(form=form)
 
 def getAvailables():
-    request.vars.year
+    rooms = db.mytable(db.t_room.==id && )
     request.vars.type
+    request.vars.year
     request.vars.gender
     request.vars.semester
     return 100;
