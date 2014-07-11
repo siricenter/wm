@@ -191,7 +191,7 @@ db.define_table('t_request_archive',db.t_request,Field('current_record','referen
 
 ########################################
 db.define_table('t_room',
-    Field('f_room_type_id', type='references t_floor',
+    Field('f_room_type_id', type='references t_room_type',
           label=T('Room Type')),
     Field('f_apartment_id', type='references t_apartment',
           label=T('Apartment Number'),readable=False,writable=False),
