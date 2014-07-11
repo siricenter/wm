@@ -132,11 +132,11 @@ I00
 sg6
 I2
 sg7
-S'INTEGER REFERENCES t_floor (id) ON DELETE CASCADE'
+S'INTEGER REFERENCES t_room_type (id) ON DELETE CASCADE'
 p36
 sg9
 I00
 sg10
-S'references t_floor'
+S'references t_room_type'
 p37
 ss.

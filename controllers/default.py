@@ -235,9 +235,26 @@ def t_room_type_manage():
     return dict(form=form)
 
 def getAvailables():
-    rooms = db.mytable(db.t_room.==id && )
+    rooms = db.t_building.f_building_type == request.vars.gender
     request.vars.type
     request.vars.year
     request.vars.gender
     request.vars.semester
-    return 100;
+    return rooms;
+
+def submitContract():
+    request.vars.type
+    request.vars.year
+    request.vars.gender
+    request.vars.semester
+    request.vars.firstName
+    request.vars.lastName
+    request.vars.city
+    request.vars.state
+    request.vars.zip
+    request.vars.phone
+    request.vars.email
+    return request.vars.email;
+
+def getSemesterDates():
+    return request.vars.year + request.vars.semester;

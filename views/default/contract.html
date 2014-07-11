@@ -40,7 +40,7 @@
 
 		<div class="span2"><lable>Semester: </lable></div>
 		<div class="span3">
-			<select name="semester"  onchange="getAvailables()">
+			<select name="semester"  onchange="getAvailables(); getSemesterDates();">
 				<option style="display:none"></option>
 				<option value="fall">Fall</option>
 				<option value="winter">Winter</option>
@@ -49,12 +49,14 @@
 			</select><br/>
 		</div>
 		<div class="span7"> Year:
-			<select name="year"  onchange="getAvailables()">
+			<select name="year"  onchange="getAvailables(); getSemesterDates();">
 				<option style="display:none"></option>
 				<option value="{{=year}}">{{=year}}</option>
 				<option value="{{=year+1}}">{{=year+1}}</option>
 			</select><br/>
 		</div>
+
+		<div class="span1"></div><div class="span11" id="semesterDates"></div>
 
 		<div class="span2">Room Type:</div>
 		<div class="span10">		
@@ -76,6 +78,18 @@
 
 <script type="text/javascript">
 
+function getSemesterDates()
+{
+	var semester = $("select[name=semester]").val();
+	var year = $("select[name=year]").val();
+
+	$.get("{{=URL('getSemesterDates')}}", {'year':year, 'semester':semester},
+    function(data/*resulting data*/)
+    {
+        document.getElementById("semesterDates").innerHTML = data + "<br/><br/>";
+    } );
+}
+
 function getAvailables()
 {
 	var gender = $("input[name=gender]:checked").val();
@@ -93,10 +107,28 @@ function getAvailables()
 
 function send()
 {
-	// get vars
-	var fname = $('[name=fName]').value;
-	document.getElementById('temp').innerHTML = fname;
+	var gender = $("input[name=gender]:checked").val();
+	var semester = $("select[name=semester]").val();
+	var year = $("select[name=year]").val();
+	var type = $("input[name=roomType]:checked").val();
+
+	var firstName = $("input[name=fName]").val();
+	var lastName = $("select[name=lName]").val();
+	var city = $("input[name=city]").val();
+	var state = $("select[name=state]").val();
+	var zip = $("input[name=zip]").val();
+	var phone = $("select[name=phone]").val();
+	var email = $("input[name=email]").val();
 	
+	var data = {'year':year, 'gender':gender, 'semester':semester, 'type':type, 
+	'firstName':firstName, 'lastName':lastName, 'city':city, 'state':state, 'zip':zip,
+	'phone':phone, 'email':email};
+
+	$.get("{{=URL('submitContract')}}", data,
+    function(data/*resulting data*/)
+    {
+        document.getElementById("output").innerHTML = data;
+    } );	
 }
 
 </script>
