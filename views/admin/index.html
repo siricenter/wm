@@ -48,9 +48,7 @@
         datatype: "json",
 		data: "array="+JSON.stringify(tester),
         success: function(data){ 
-				var tables = new Array();
-				tables = (data);
-				var result = false;
+				var tables = JSON.parse(data)
 				return $('#myDiv').html(tables)
 			}
         });
