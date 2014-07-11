@@ -3,6 +3,19 @@ from gluon.tools import Auth
 auth = Auth(db)
 auth.define_tables(username=False,signature=False)
 
+########################################
+db.define_table('t_semester_name',
+    Field('f_semester_name', type='string',
+          label=T('Semester')),
+    Field('f_creation_date', type='date',
+          label=T('Creation Date'),writable=False,readable=False),
+    Field('f_last_updated_date', type='date',
+          label=T('Last Updated Date'),writable=False,readable=False),
+    auth.signature,
+    format='%(f_start_date)s',
+    migrate=settings.migrate)
+
+db.define_table('t_semester_name_archive',db.t_semester_name,Field('current_record','reference t_semester_name',readable=False,writable=False))
 
 ########################################
 db.define_table('t_semester',
@@ -10,6 +23,8 @@ db.define_table('t_semester',
           label=T('Start Date')),
     Field('f_end_date', type='date',
           label=T('End Date')),
+	Field('f_semester', type='references t_semester_name',
+          label=T('Semeseter')),
     Field('f_creation_date', type='date',
           label=T('Creation Date'),writable=False,readable=False),
     Field('f_last_updated_date', type='date',
