@@ -44,12 +44,12 @@
 	function test(){
 	var tester = executeQuery();
     $.ajax({
-        url: "tables",
+        url: "admin/tables",
         datatype: "json",
 		data: "array="+JSON.stringify(tester),
         success: function(data){ 
 				var tables = JSON.parse(data)
-				return $('#myDiv').html(tables)
+				return $('#myDiv').html(data)
 			}
         });
     }
@@ -63,7 +63,7 @@
 	<form>
 	<ul>
 	{{for x in range(len(tables)):}}
-		<li class="btn selection" id={{=tables[x]}} onclick="toggle(this.id)"><input type="checkbox" name={{=tables[x]}} value={{=tables[x]}}>{{=tables[x].title()}}</li>
+		<li class="btn selection" id="{{=tables[x]}}" onclick="toggle(this.id)"><input type="checkbox" name="{{=tables[x]}}" value="{{=tables[x]}}">{{=tables[x]}}</li>
 	{{pass}}
 	
 	<!--<li class="btn" onclick="executeQuery()">Execute</li>-->
@@ -76,6 +76,7 @@
 	{{=A('manageUser', callback=URL('manageUsers'), target='myDiv')}}
 	<div id="myDiv"><h2>Let AJAX change this text</h2></div>
 	<ul>
+	<p>{{=tables}}</p>
 	<!--{{import re
 		testList = db.tables
 		test = []}}
