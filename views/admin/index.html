@@ -37,22 +37,51 @@
 		
 	}
 	
-	function testing(){
-		ajax('{{=URL("admin", "test")}}', ['tester'], 'myDiv');
+	function getTableNames(){
+		var setTableNames = executeQuery()
+		var list = new Array()
+		var results = $.ajax({
+			url: "tables",
+			datatype: "json",
+			data: "array="+JSON.stringify(setTableNames),
+			success: function(data){ 
+					list = JSON.parse(data)
+					var keysList = []
+					var temp = []
+					
+					//for(var i = 0; i < list.length; i++){
+					//	//console.log(i)
+					//	for(var j = 0; j < Object.keys(list[i]).length; j++){
+					//		console.log(list[i][j])
+					//	}
+					//}
+					
+					for(var x in data){
+						keysList.push(Object.keys(list[x]))
+						
+					}
+					for(var y in keysList){
+						temp.push(keysList[y][0])
+						
+					}
+					// for(var x in list){
+					// 	//arr.push(list[x])
+					// 	for(var y in list[x]){
+					// 		//arr[x].push(list[x][y])
+					// 		console.log(Object.keys(list[x]))
+					// 		arr.push([Object.keys(list[x])])
+					// 	}
+					// }
+					//console.log(temp)
+					return keysList
+				}
+			})
+		return results
 	}
 	
-	function test(){
-	var tester = executeQuery();
-    $.ajax({
-        url: "admin/tables",
-        datatype: "json",
-		data: "array="+JSON.stringify(tester),
-        success: function(data){ 
-				var tables = JSON.parse(data)
-				return $('#myDiv').html(data)
-			}
-        });
-    }
+	function displayTableNames(){
+		var results = getTableNames();
+	}
 	
 </script>
 
@@ -68,7 +97,7 @@
 	
 	<!--<li class="btn" onclick="executeQuery()">Execute</li>-->
 	<!-- put the ajax in a function! -->
-	<li class="btn" onclick="test()">Execute</li>
+	<li class="btn" onclick="displayTableNames()">Execute</li>
 	</ul>
 	</form>
 </section>
@@ -76,7 +105,6 @@
 	{{=A('manageUser', callback=URL('manageUsers'), target='myDiv')}}
 	<div id="myDiv"><h2>Let AJAX change this text</h2></div>
 	<ul>
-	<p>{{=tables}}</p>
 	<!--{{import re
 		testList = db.tables
 		test = []}}
