@@ -235,7 +235,9 @@ def t_room_type_manage():
     return dict(form=form)
 
 def getAppartmentAvailables(apartmentNum):
-    return;
+    statement = "SELECT f_capacity FROM t_room WHERE f_apartment=\'"+str(apartmentNum)+"\'";
+    rooms = db.executesql(statement);
+    return rooms;
 
 def getAvailables():
     # get avail in rooms for each apartment ?return: JSON?
@@ -244,7 +246,7 @@ def getAvailables():
     request.vars.year
     request.vars.gender
     request.vars.semester
-    return db().select(db.t_building.ALL == request.vars.gender);
+    return getAppartmentAvailables(405);
 
 def submitContract():
     # check room availabilities first

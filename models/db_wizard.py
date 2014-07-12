@@ -1,3 +1,4 @@
+
 ### we prepend t_ to tablenames and f_ to fieldnames for disambiguity
 from gluon.tools import Auth
 auth = Auth(db)
@@ -55,14 +56,14 @@ db.define_table('t_building',
     Field('f_building_type', type='string',
           label=T('Building Type'),readable=False,writable=False),
     auth.signature,
-    format='%(f_building_name)s',
+    format='%s',
     migrate=settings.migrate)
 
 db.define_table('t_building_archive',db.t_building,Field('current_record','reference t_building',readable=False,writable=False))
 
 ########################################
 db.define_table('t_floor',
-    Field('f_building', type='references t_building',
+    Field('f_building', type="string",
           label=T('Building Number')),
     Field('f_floor_number', type='string',
           label=T('Floor Number')),
@@ -77,17 +78,18 @@ db.define_table('t_floor_archive',db.t_floor,Field('current_record','reference t
 
 ########################################
 db.define_table('t_apartment',
-	Field('f_building_number', type='references t_building',
+	Field('f_building_number', type='string',
           label=T('Building Number')),
-    Field('f_floor_number', type='references t_floor',
+    Field('f_floor_number', type='string',
           label=T('Floor Number')),
-    Field('f_apartment_type', type='references t_apartment_type',
-          label=T('Capacity')),
     Field('f_apartment_number', type='string',
           label=T('Apartment Number')),
     auth.signature,
     format='%(f_floor_id)s',
     migrate=settings.migrate)
+
+db.t_apartment.f_building_number.requires=IS_IN_DB(db, db.t_building,lambda row: '%s' % row.f_building_number)
+db.t_apartment.f_floor_number.requires=IS_IN_DB(db, db.t_floor,lambda row: '%s' % row.f_floor_number)
 
 db.define_table('t_apartment_archive',db.t_apartment,Field('current_record','reference t_apartment',readable=False,writable=False))
 
@@ -176,13 +178,18 @@ db.define_table('t_request_archive',db.t_request,Field('current_record','referen
 
 ########################################
 db.define_table('t_room',
-    Field('f_room_type_id', type='references t_room_type',
+    Field('f_room_type', type='string',
           label=T('Room Type')),
-    Field('f_apartment_id', type='references t_apartment',
+    Field('f_capacity', type='string',
+          label=T('Room Capacity')),
+    Field('f_apartment', type='string',
           label=T('Apartment Number'),readable=False,writable=False),
     auth.signature,
-    format='%(f_room_type_id)s',
+    format='%s',
     migrate=settings.migrate)
+
+db.t_room.f_room_type.requires=IS_IN_DB(db, db.t_room_type,lambda row: '%s' % row.f_type)
+db.t_room.f_apartment.requires=IS_IN_DB(db, db.t_apartment,lambda row: '%s' % row.f_apartment_number)
 
 db.define_table('t_room_archive',db.t_room,Field('current_record','reference t_room',readable=False,writable=False))
 
