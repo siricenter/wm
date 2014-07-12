@@ -43,15 +43,14 @@
 			datatype: "json",
 			success: function(data){ 
 					list = JSON.parse(data)
-					
 					for(var i in list){
 						for(var j in list[i]){
-							console.log(j+" : "+list[i][j])
+							//console.log(j+" : "+list[i][j])
 							var element = document.getElementById('tablesList')
 							var entry = document.createElement('li')
 							entry.setAttribute("id", j)
 							entry.setAttribute("class", "btn")
-							entry.setAttribute("onclick", "getTable()")
+							entry.setAttribute("onclick", "displayTableNames(this.id)")
 							entry.appendChild(document.createTextNode(list[i][j]))
 							element.appendChild(entry)
 						}						
@@ -60,13 +59,18 @@
 			})
 	}
 	
-	function displayTableNames(){
-		alert('here');
+	function displayTableNames(id){
+		$.ajax({
+			url: "viewTable",
+			datatype: "json",
+			data: "tableName="+JSON.stringify(id),
+			success: function(data){
+				return $('#myDiv').html(data)
+			}
+		})
 	}
 	
-	document.ready(
-		getTableNames()
-	)
+	getTableNames()
 	
 </script>
 

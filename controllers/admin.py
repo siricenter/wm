@@ -15,7 +15,8 @@ def index():
 	return locals()
 
 @auth.requires_login()	
-def manageUsers():
+def viewTable():
+	table = request.vars.tableName
 	query = db.t_building
 	grid = SQLFORM.grid(query=query)
 	return grid
