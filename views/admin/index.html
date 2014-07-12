@@ -34,63 +34,39 @@
 		execute.setChildren();
 		//alert(execute.getParams());
 		return execute.getParams();
-		
 	}
 	
 	function getTableNames(){
-		var setTableNames = executeQuery()
 		var list = new Array()
 		var results = $.ajax({
 			url: "tables",
 			datatype: "json",
-			data: "array="+JSON.stringify(setTableNames),
 			success: function(data){ 
-					list = jQuery.parseJSON(data)
-					var keysListTemp = []
-					var keysList = []
-					var dataSet = []
+					list = JSON.parse(data)
 					
-					//for(var i = 0; i < list.length; i++){
-					//	//console.log(i)
-					//	for(var j = 0; j < Object.keys(list[i]).length; j++){
-					//		console.log(list[i][j])
-					//	}
-					//}
-					
-					
-					for(var x in list){
-						keysListTemp.push(Object.keys(list[x]))
+					for(var i in list){
+						for(var j in list[i]){
+							console.log(j+" : "+list[i][j])
+							var element = document.getElementById('tablesList')
+							var entry = document.createElement('li')
+							entry.setAttribute("id", j)
+							entry.setAttribute("class", "btn")
+							entry.setAttribute("onclick", "getTable()")
+							entry.appendChild(document.createTextNode(list[i][j]))
+							element.appendChild(entry)
+						}						
 					}
-					for(var y in keysListTemp){
-						//keysList.push(keysListTemp[y][0])
-						for(var z in list){
-							
-						}
-						var element = document.getElementById('tablesList')
-						var entry = document.createElement('li')
-						entry.setAttribute("id", x)
-						entry.setAttribute("class", "btn")
-						entry.appendChild(document.createTextNode(list[x]));
-						element.appendChild(entry)
-					}
-					// for(var x in list){
-					// 	//arr.push(list[x])
-					// 	for(var y in list[x]){
-					// 		//arr[x].push(list[x][y])
-					// 		console.log(Object.keys(list[x]))
-					// 		arr.push([Object.keys(list[x])])
-					// 	}
-					// }
-					//console.log(temp)
-					return dataSet
 				}
 			})
-		return results
 	}
 	
 	function displayTableNames(){
-		var results = getTableNames();
+		alert('here');
 	}
+	
+	document.ready(
+		getTableNames()
+	)
 	
 </script>
 
@@ -100,9 +76,10 @@
 <section id="nav">
 	<form>
 	<ul id="tablesList">
-	{{for x in range(len(tables)):}}
+	<!-- removed by mat 140712-->
+	<!--{{for x in range(len(tables)):}}
 		<li class="btn selection" id="{{=tables[x]}}" onclick="toggle(this.id)"><input type="checkbox" name="{{=tables[x]}}" value="{{=tables[x]}}">{{=tables[x]}}</li>
-	{{pass}}
+	{{pass}}-->
 	
 	<!--<li class="btn" onclick="executeQuery()">Execute</li>-->
 	<!-- put the ajax in a function! -->
