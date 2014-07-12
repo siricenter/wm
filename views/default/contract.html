@@ -13,15 +13,17 @@
 		<div class="span2"><lable>Last Name: </lable></div>
 		<div class="span10"><input type="text" name="lName"/></div>
 		
+		<div class="span2"><lable>Address: </lable></div>
+		<div class="span10"><input type="text" name="address"/></div>
 		<div class="span2"><lable>City: </lable></div>
 		<div class="span10"><input type="text" name="city"/></div>
 		<div class="span2"><lable>State: </lable></div>
 		<div class="span10"><input type="text" name="state"/></div>
 		<div class="span2"><lable>Zip: </lable></div>
-		<div class="span10"><input type="text" name="zip"/></div>
+		<div class="span10"><input type="text" name="zip" maxlength="5" size="5" /></div>
 		
 		<div class="span2"><lable>Phone: </lable></div>
-		<div class="span10"><input type="text" name="phone"/></div>
+		<div class="span10"><input type="text" name="phone" maxlength="12" /></div>
 		
 		<div class="span2"><lable>BYU-Email: </lable></div>
 		<div class="span10"><input type="text" name="email"/></div>
@@ -114,6 +116,7 @@ function send()
 
 	var firstName = $("input[name=fName]").val();
 	var lastName = $("select[name=lName]").val();
+	var address = $("input[name=address]").val();
 	var city = $("input[name=city]").val();
 	var state = $("select[name=state]").val();
 	var zip = $("input[name=zip]").val();
@@ -121,7 +124,7 @@ function send()
 	var email = $("input[name=email]").val();
 	
 	var data = {'year':year, 'gender':gender, 'semester':semester, 'type':type, 
-	'firstName':firstName, 'lastName':lastName, 'city':city, 'state':state, 'zip':zip,
+	'firstName':firstName, 'lastName':lastName, 'address':address, 'city':city, 'state':state, 'zip':zip,
 	'phone':phone, 'email':email};
 
 	$.get("{{=URL('submitContract')}}", data,

@@ -235,6 +235,8 @@ def t_room_type_manage():
     return dict(form=form)
 
 def getAvailables():
+    # get avail in rooms for each apartment (function?) ?return: JSON?
+    # returns it to view for processing
     rooms = db.t_building.f_building_type == request.vars.gender
     request.vars.type
     request.vars.year
@@ -243,6 +245,8 @@ def getAvailables():
     return rooms;
 
 def submitContract():
+    # check room availabilities first
+    # then check to see if the desired room is available (function?)
     request.vars.type
     request.vars.year
     request.vars.gender
