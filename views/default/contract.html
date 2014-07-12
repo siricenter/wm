@@ -110,6 +110,7 @@ function getAvailables()
 function send()
 {
 	var gender = $("input[name=gender]:checked").val();
+
 	var semester = $("select[name=semester]").val();
 	var year = $("select[name=year]").val();
 	var type = $("input[name=roomType]:checked").val();
@@ -127,7 +128,7 @@ function send()
 	'firstName':firstName, 'lastName':lastName, 'address':address, 'city':city, 'state':state, 'zip':zip,
 	'phone':phone, 'email':email};
 
-	$.get("{{=URL('submitContract')}}", data,
+	$.post("{{=URL('submitContract')}}", data,
     function(data/*resulting data*/)
     {
         document.getElementById("output").innerHTML = data;
