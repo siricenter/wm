@@ -37,17 +37,17 @@ def test():
 
 import re
 def tables():
-	testList = db.tables
-	test = []
-	for x in range(len(testList)):
-		match = re.search('archive',testList[x])
+	tableNames = db.tables
+	tableList = []
+	for x in range(len(tableNames)):
+		match = re.search('archive',tableNames[x])
 		if not match:
-			val = testList[x].replace('auth_','')
+			val = tableNames[x].replace('auth_','')
 			val = re.sub('^t_', '', val)
 			val = val.replace('_',' ')
-			test.append({testList[x]:val.title()})
+			tableList.append({tableNames[x]:val.title()})
 			continue
-	return response.json(test)
+	return response.json(tableList)
 	
 def testing():
 	list = db.tables
