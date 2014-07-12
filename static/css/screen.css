@@ -23,7 +23,7 @@ body[role=admin] section[id="nav"] form li {
 	color: black;
 	font-weight: bold;
 }
-body[role=admin] section[id="nav"] form ul li:last-child{
+body[role=admin] section[id="nav"] form ul li[id="execute"]{
 	margin-bottom: 0px;
 	text-align: center;
 	background-image: linear-gradient(to bottom, #8F8F8F, #FFE6E6);

@@ -34,25 +34,39 @@
 		execute.setChildren();
 		//alert(execute.getParams());
 		return execute.getParams();
-		
 	}
 	
-	function testing(){
-		ajax('{{=URL("admin", "test")}}', ['tester'], 'myDiv');
+	function getTableNames(){
+		var list = new Array()
+		var results = $.ajax({
+			url: "tables",
+			datatype: "json",
+			success: function(data){ 
+					list = JSON.parse(data)
+					
+					for(var i in list){
+						for(var j in list[i]){
+							console.log(j+" : "+list[i][j])
+							var element = document.getElementById('tablesList')
+							var entry = document.createElement('li')
+							entry.setAttribute("id", j)
+							entry.setAttribute("class", "btn")
+							entry.setAttribute("onclick", "getTable()")
+							entry.appendChild(document.createTextNode(list[i][j]))
+							element.appendChild(entry)
+						}						
+					}
+				}
+			})
 	}
 	
-	function test(){
-	var tester = executeQuery();
-    $.ajax({
-        url: "admin/tables",
-        datatype: "json",
-		data: "array="+JSON.stringify(tester),
-        success: function(data){ 
-				var tables = JSON.parse(data)
-				return $('#myDiv').html(data)
-			}
-        });
-    }
+	function displayTableNames(){
+		alert('here');
+	}
+	
+	document.ready(
+		getTableNames()
+	)
 	
 </script>
 
@@ -61,14 +75,15 @@
 <div class="admin">
 <section id="nav">
 	<form>
-	<ul>
-	{{for x in range(len(tables)):}}
+	<ul id="tablesList">
+	<!-- removed by mat 140712-->
+	<!--{{for x in range(len(tables)):}}
 		<li class="btn selection" id="{{=tables[x]}}" onclick="toggle(this.id)"><input type="checkbox" name="{{=tables[x]}}" value="{{=tables[x]}}">{{=tables[x]}}</li>
-	{{pass}}
+	{{pass}}-->
 	
 	<!--<li class="btn" onclick="executeQuery()">Execute</li>-->
 	<!-- put the ajax in a function! -->
-	<li class="btn" onclick="test()">Execute</li>
+	<li class="btn" onclick="displayTableNames()">Execute</li>
 	</ul>
 	</form>
 </section>
@@ -76,7 +91,6 @@
 	{{=A('manageUser', callback=URL('manageUsers'), target='myDiv')}}
 	<div id="myDiv"><h2>Let AJAX change this text</h2></div>
 	<ul>
-	<p>{{=tables}}</p>
 	<!--{{import re
 		testList = db.tables
 		test = []}}
