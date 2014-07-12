@@ -70,6 +70,9 @@ db.define_table('t_floor',
     format='%(f_building_id)s',
     migrate=settings.migrate)
 
+db.t_floor.f_building.requires=IS_IN_DB(db, db.t_building,lambda row: '%s' % row.f_building_number)
+db.t_floor.f_floor_number.requires=IS_IN_SET(('1','2','3', '4'))
+
 db.define_table('t_floor_archive',db.t_floor,Field('current_record','reference t_floor',readable=False,writable=False))
 
 ########################################
