@@ -8,7 +8,6 @@ def call(): return service()
 from datetime import date
 from gluon.serializers import json
 
-
 @auth.requires_login()
 def index():
 	username = auth.user.first_name
