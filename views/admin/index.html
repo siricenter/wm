@@ -45,9 +45,10 @@
 			datatype: "json",
 			data: "array="+JSON.stringify(setTableNames),
 			success: function(data){ 
-					list = JSON.parse(data)
+					list = jQuery.parseJSON(data)
+					var keysListTemp = []
 					var keysList = []
-					var temp = []
+					var dataSet = []
 					
 					//for(var i = 0; i < list.length; i++){
 					//	//console.log(i)
@@ -56,13 +57,21 @@
 					//	}
 					//}
 					
+					
 					for(var x in list){
-						keysList.push(Object.keys(list[x]))
-						
+						keysListTemp.push(Object.keys(list[x]))
 					}
-					for(var y in keysList){
-						temp.push(keysList[y][0])
-						
+					for(var y in keysListTemp){
+						//keysList.push(keysListTemp[y][0])
+						for(var z in list){
+							
+						}
+						var element = document.getElementById('tablesList')
+						var entry = document.createElement('li')
+						entry.setAttribute("id", x)
+						entry.setAttribute("class", "btn")
+						entry.appendChild(document.createTextNode(list[x]));
+						element.appendChild(entry)
 					}
 					// for(var x in list){
 					// 	//arr.push(list[x])
@@ -73,7 +82,7 @@
 					// 	}
 					// }
 					//console.log(temp)
-					return keysList
+					return dataSet
 				}
 			})
 		return results
@@ -90,7 +99,7 @@
 <div class="admin">
 <section id="nav">
 	<form>
-	<ul>
+	<ul id="tablesList">
 	{{for x in range(len(tables)):}}
 		<li class="btn selection" id="{{=tables[x]}}" onclick="toggle(this.id)"><input type="checkbox" name="{{=tables[x]}}" value="{{=tables[x]}}">{{=tables[x]}}</li>
 	{{pass}}
