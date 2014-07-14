@@ -1,114 +1,19 @@
-{{extend 'adminlayout.html'}}
-<script>
-	//toggle check boxes
-	function toggle(id){
-		if(document.getElementById(id).firstElementChild.checked !=true){
-			document.getElementById(id).firstElementChild.checked = true;
-		}else{
-			document.getElementById(id).firstElementChild.checked = false;
-		}
-	}
-	//getQuery class
-	var Query = function(){
-		this.params = new Array();
-	}
-	//get query parameters from anything with class "selection"
-	Query.prototype.setChildren = function(){
-		var list = document.querySelectorAll('.selection');
-		for(var i = 0; i < list.length; i++){
-			if(document.getElementById(list[i].id).firstElementChild.checked == true){
-				this.params.push(document.getElementById(list[i].id).firstElementChild.value);		
-			}
-		}
-		if(this.params.length <= 0){
-			throw new Error("Selection list empty!");
-		}
-	}
-	//return params
-	Query.prototype.getParams = function(){
-		return this.params;
-	}
-	//executeQuery does all the goodness
-	function executeQuery(){
-		var execute = new Query();
-		execute.setChildren();
-		//alert(execute.getParams());
-		return execute.getParams();
-	}
-	
-	function getTableNames(){
-		var list = new Array()
-		var results = $.ajax({
-			url: "tables",
-			datatype: "json",
-			success: function(data){ 
-					list = JSON.parse(data)
-					for(var i in list){
-						for(var j in list[i]){
-							//console.log(j+" : "+list[i][j])
-							var element = document.getElementById('tablesList')
-							var entry = document.createElement('li')
-							entry.setAttribute("id", j)
-							entry.setAttribute("class", "btn")
-							entry.setAttribute("onclick", "displayTableNames(this.id)")
-							entry.appendChild(document.createTextNode(list[i][j]))
-							element.appendChild(entry)
-						}						
-					}
-				}
-			})
-	}
-	
-	function displayTableNames(id){
-		$.ajax({
-			url: "viewTable",
-			datatype: "json",
-			data: "tableName="+JSON.stringify(id),
-			success: function(data){
-				return $('#myDiv').html(data)
-			}
-		})
-	}
-	
-	getTableNames()
-	
-</script>
+{{extend 'layout.html'}}
 
-<h1>Welcome {{=username.capitalize()}}!</h1>
+<h1>Welcome {{=auth.user.first_name.capitalize()}}!</h1>
 
-<div class="admin">
-<section id="nav">
-	<form>
-	<ul id="tablesList">
-	<!-- removed by mat 140712-->
-	<!--{{for x in range(len(tables)):}}
-		<li class="btn selection" id="{{=tables[x]}}" onclick="toggle(this.id)"><input type="checkbox" name="{{=tables[x]}}" value="{{=tables[x]}}">{{=tables[x]}}</li>
-	{{pass}}-->
-	
-	<!--<li class="btn" onclick="executeQuery()">Execute</li>-->
-	<!-- put the ajax in a function! -->
-	<li class="btn" onclick="displayTableNames()">Execute</li>
-	</ul>
-	</form>
-</section>
-<section id="dataView">
-	{{=A('manageUser', callback=URL('manageUsers'), target='myDiv')}}
-	<div id="myDiv"><h2>Let AJAX change this text</h2></div>
-	<ul>
-	<!--{{import re
-		testList = db.tables
-		test = []}}
-	{{for x in range(len(testList)):
-		match = re.search('archive',testList[x])
-		if not match:
-			test.append((testList[x]))
-			continue}}
-	{{pass}}
-	<li>{{=test}}</li>-->
+<div class="row">
+	<a href="/wm/admin/cruds/create/t_building">Create Building</a>
+</div>
 
+<div class="row">
+	<a href="/wm/admin/cruds/create/t_floor">Create Floor</a>
+</div>
 
-	
-	
-	</ul>
-</section>
+<div class="row">
+	<a href="/wm/admin/cruds/create/t_apartment">Create Apartment</a>
+</div>
+
+<div class="row">
+	<a href="/wm/admin/cruds/create/t_semester">Create Semester</a>
 </div>
