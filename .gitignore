@@ -1,5 +1,3 @@
-/errors/
-/sessions/
-sql.log
-storage.sqlite
-
+errors/*
+sessions/*
+databases/*
